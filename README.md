@@ -1,10 +1,10 @@
-# fa23-cs411-team067-Sparkling
+# SkyStats
 
-# About this project
+This project supports search flight delay history in U.S. in 2015, based on a previous group project in CS 411 [Course project](https://github.com/cs411-alawini/fa23-cs411-team067-Sparkling) at UIUC.
 
-This project supports search flight delay history in U.S. in 2015. The dataset pertains to 2015 flight delays and cancellations from the U.S. Department of Transportation’s (DOT) Bureau of Transportation Statistics. Link: https://www.kaggle.com/datasets/usdot/flight-delays.
+Data: [2015 US Transporation from Kaggle](https://www.kaggle.com/datasets/usdot/flight-delays.)
 
-# How to set up for this project?
+# Set up for this project
 
 1. clone the github repository to your local computer
 2. enter the subfolder flight-delay
@@ -12,6 +12,14 @@ This project supports search flight delay history in U.S. in 2015. The dataset p
 4. run `npm install` to install packages required for this project
 5. run `npm index.js` to start the project
 6. visit `localhost:3000/` in your browser and now you can explore it
+
+# Todo
+
+- [x] add Redis as a cache
+- [ ] Re-configure the front end using React
+- [ ] Add ORM to prevent SQL injection
+- [x] Lump private info in .env file
+- [ ] Since there are so many rows, try retrieve 20 rows at a time
 
 # Miscellaneous
 

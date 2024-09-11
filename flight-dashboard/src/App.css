@@ -1,0 +1,29 @@
+@media screen and (min-width: 600px) {
+  .centeredTableContainer,
+  .search-box {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 80%;
+  }
+
+  .search-box input[type="text"] {
+    width: calc(50% - 10px); /* Adjust the 10px if you have padding or border */
+    margin-right: 10px; /* This provides spacing between the two inputs */
+  }
+
+  .search-box input[type="text"]:last-child {
+    margin-right: 0; /* Ensures the last input does not have right margin */
+  }
+
+  .search-and-table {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* This centers the search box with the table */
+  }
+
+  .search-box {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center; /* Center the inputs within the search box */
+  }
+}
