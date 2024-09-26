@@ -40,7 +40,7 @@ SELECT
   a.CITY AS ori_city,
   DESTINATION_AIRPORT,
   a1.CITY AS des_city,
-  SUM(CASE WHEN ARRIVAL_DELAY > 0 THEN 1 ELSE 0 END) / COUNT(*) AS delay_rate
+  f.delay_rate
 FROM
   (SELECT
      ORIGIN_AIRPORT,
