@@ -82,7 +82,7 @@ router.get("/delay-history/flight/:airline_IATA/:number", async (req, res) => {
 
   const cacheKey = `delay-history:flight:${airline_IATA}:${number}`;
   const sql = `
-          SELECT *
+          SELECT YEAR, MONTH, DAY, DEPARTURE_TIME, ARRIVAL_TIME, ARRIVAL_DELAY
           FROM Flights
           WHERE AIRLINE = ? AND FLIGHT_NUMBER = ? AND DEPARTURE_TIME > 0
         `;
