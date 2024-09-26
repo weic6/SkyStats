@@ -60,10 +60,10 @@ WHERE a.city= ?
 LIMIT 50
 `;
   checkCache(req, res, cacheKey, sql, [city], (res) => {
-    //caculate delay rate after getting delay_count and total_count in res
+    //caculate delay rate after getting delay_count and total_flights in res
     const responseWithDelayRate = results.map((row) => {
       const delay_rate =
-        row.total_count > 0 ? row.delay_count / row.total_count : 0;
+        row.total_flights > 0 ? row.delay_count / row.total_flights : 0;
       return {
         ...row, // Keep all other fields in the result
         delay_rate: delay_rate, // Add the computed delay_rate field
