@@ -61,14 +61,14 @@ LIMIT 50
 `;
   checkCache(req, res, cacheKey, sql, [city], (res) => {
     //caculate delay rate after getting delay_count and total_count in res
-    const responseWithDelayRate = result.map((row) => ({
-      origin_airport: row.ORIGIN_AIRPORT,
-      ori_city: row.ori_city,
-      destination_airport: row.DESTINATION_AIRPORT,
-      des_city: row.des_city,
-      delay_rate:
-        row.total_flights > 0 ? row.delay_count / row.total_flights : 0,
-    }));
+    const responseWithDelayRate = results.map((row) => {
+      const delay_rate =
+        row.total_count > 0 ? row.delay_count / row.total_count : 0;
+      return {
+        ...row, // Keep all other fields in the result
+        delay_rate: delay_rate, // Add the computed delay_rate field
+      };
+    });
     res.json(responseWithDelayRate);
   });
 });
