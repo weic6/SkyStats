@@ -40,12 +40,14 @@ SELECT
   a.CITY AS ori_city,
   DESTINATION_AIRPORT,
   a1.CITY AS des_city,
-  f.delay_rate
+  f.delay_count
+  f.total_flights
 FROM
   (SELECT
      ORIGIN_AIRPORT,
      DESTINATION_AIRPORT,
-     SUM(CASE WHEN ARRIVAL_DELAY > 0 THEN 1 ELSE 0 END) / NULLIF(COUNT(*), 0) AS delay_rate
+     SUM(CASE WHEN ARRIVAL_DELAY > 0 THEN 1 ELSE 0 END) AS delay_count,
+     COUNT(*) AS total_flights
    FROM Flights
    WHERE
      ORIGIN_AIRPORT NOT LIKE '1__' AND
@@ -57,7 +59,18 @@ JOIN Airports a1 ON a1.IATA_CODE = f.DESTINATION_AIRPORT
 WHERE a.city= ?
 LIMIT 50
 `;
-  checkCache(req, res, cacheKey, sql, [city]);
+  checkCache(req, res, cacheKey, sql, [city], (res) => {
+    //caculate delay rate after getting delay_count and total_count in res
+    const responseWithDelayRate = result.map((row) => ({
+      origin_airport: row.ORIGIN_AIRPORT,
+      ori_city: row.ori_city,
+      destination_airport: row.DESTINATION_AIRPORT,
+      des_city: row.des_city,
+      delay_rate:
+        row.total_flights > 0 ? row.delay_count / row.total_flights : 0,
+    }));
+    res.json(responseWithDelayRate);
+  });
 });
 
 router.get("/delay-history/airport/:airport", async (req, res) => {
